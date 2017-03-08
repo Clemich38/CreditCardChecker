@@ -101,15 +101,65 @@ export class AppComponent {
 
   private IINCheck(iin: number)
   {
-    // Visa
-    if(this.extractDigits(iin, 1) == 4)
+    let tmpNb: number = 0;
+    this.IIN = "Unknown";
+
+    // Visa (4)
+    tmpNb = this.extractDigits(iin, 1);
+    if(tmpNb == 4)
     {
       this.IIN = "Visa";
 
       // Visa Electron
-      let tmpNb = this.extractDigits(iin, 4);
+      tmpNb = this.extractDigits(iin, 4);
       if ((tmpNb == 4026) || (tmpNb == 4508) || (tmpNb == 4844) || (tmpNb == 4913) || (tmpNb == 4917))
         this.IIN += " Electron";
+    }
+
+    // Discover
+    else if(tmpNb == 6)
+    {
+      tmpNb = this.extractDigits(iin, 4);
+      if (tmpNb == 6011)
+        this.IIN = "Discover Card";
+        
+      tmpNb = this.extractDigits(iin, 3);
+      if (tmpNb >= 644 && tmpNb <= 649)
+        this.IIN = "Discover Card";
+
+      tmpNb = this.extractDigits(iin, 2);
+      if (tmpNb == 65)
+        this.IIN = "Discover Card";
+
+      if (iin >= 622126 && iin <= 622925)
+        this.IIN = "Discover Card";
+    }
+
+    else
+    {
+      // Master Card (51 - 55)
+      tmpNb = this.extractDigits(iin, 2);
+      if (tmpNb >= 51 && tmpNb <= 55)
+      {
+        this.IIN = "MasterCard";
+      }
+
+      // Dinners Club (36 38)
+      else if ((tmpNb == 36) || (tmpNb == 38))
+      {
+        this.IIN = "Diners Club";
+      }
+
+      // American Express (Amex) (34 37)
+      else if ((tmpNb == 34) || (tmpNb == 37)) {
+        this.IIN = "American Express (Amex)";
+      }
+
+      // Japan Credit Bureau  (35)
+      else if (tmpNb == 35)
+      {
+        this.IIN = "Japan Credit Bureau (JCB)";
+      }
     }
 
   }
