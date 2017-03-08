@@ -14,6 +14,10 @@ export class AppComponent {
   private isValid: boolean;
   private hasGoodLength: boolean;
 
+  private num1: number;
+  private num2: number;
+  private num3: number;
+
   constructor()
   {
     this.cardNb = "";
@@ -21,10 +25,16 @@ export class AppComponent {
     this.IIN = "Unknown";
     this.hasGoodLength = false;
     this.isValid =  false;
+
+    this.num1 = 63138752986038755;
+    this.num2 = 99000;
+    this.num3 = this.extractDigits(this.num1, 6);
   }
 
   private Check(value)
   {
+    this.num3 = this.extractDigits(parseInt(value), 6);
+
     this.cardNb = value;
 
     let tab: number[] = this.cardNb.split("").map(function (x) { return parseInt(x, 10) });
@@ -56,6 +66,23 @@ export class AppComponent {
       sum += digit > 9 ? digit - 9 : digit;
     }
     return sum % 10 == 0;
+  }
+
+  private extractDigits(cardNb: number, length: number): number
+  {
+    let tmpNb: number = cardNb;
+
+    let upperLimit: number = 0;
+    for(let i = 0; i < length; i++)
+    {
+      upperLimit = (upperLimit * 10) + 9;
+    }
+
+    while (tmpNb > upperLimit)
+    {
+      tmpNb = parseInt((tmpNb / 10).toFixed(), 10);
+    }
+    return tmpNb;
   }
 
   private MIICheck(mii: number)
