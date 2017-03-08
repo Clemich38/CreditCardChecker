@@ -72,12 +72,15 @@ export class AppComponent {
   {
     let tmpNb: number = cardNb;
 
+    // Get the max decimal value for a specific decimal nb length 
+    // if length is 4, upperLimit will be 9999
     let upperLimit: number = 0;
     for(let i = 0; i < length; i++)
     {
       upperLimit = (upperLimit * 10) + 9;
     }
 
+    // Extract the n (length) fisrt digits
     while (tmpNb > upperLimit)
     {
       tmpNb = parseInt((tmpNb / 10).toPrecision(), 10);
