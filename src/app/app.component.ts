@@ -55,10 +55,10 @@ export class AppComponent {
     let length: number = digits.length;
     for (let i = 0; i < length; i++) {
 
-      // get digits in reverse order
+      // Invert the digits order
       let digit: number = digits[length - i - 1];
 
-      // every 2nd number multiply with 2
+      // Every 2nd number is multiply by 2
       if (i % 2 == 1)
         digit *= 2;
 
