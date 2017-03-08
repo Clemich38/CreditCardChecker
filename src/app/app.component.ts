@@ -11,11 +11,10 @@ export class AppComponent {
   private cardNb: string;
   private MII: string;
   private IIN: string;
-  private isValid: boolean;
-  private hasGoodLength: boolean;
-
   private MIINb: number;
   private IINNb: number;
+  private isValid: boolean;
+  private hasGoodLength: boolean;
 
   constructor()
   {
@@ -26,6 +25,8 @@ export class AppComponent {
     this.isValid =  false;
   }
 
+  // Method called every time the Card number is modified
+  // Parform all the checks and parsing, and update the class member variables
   private Check(value)
   {
     this.MIINb = this.extractDigits(parseInt(value), 1);
@@ -33,6 +34,7 @@ export class AppComponent {
 
     this.cardNb = value;
 
+    // Create a number array from the input string
     let tab: number[] = this.cardNb.split("").map(function (x) { return parseInt(x, 10) });
 
     if ((tab.length < 12) || (tab.length > 19))
@@ -46,6 +48,7 @@ export class AppComponent {
     }
   }
 
+  // Method implementing the Luhn algorithm to check the card number integrity
   private LuhnCheck(digits: number[]): boolean
   {
     let sum: number = 0;
@@ -64,6 +67,7 @@ export class AppComponent {
     return sum % 10 == 0;
   }
 
+  // Method to extract n (length) digits from a decimal number starting from the left
   private extractDigits(cardNb: number, length: number): number
   {
     let tmpNb: number = cardNb;
@@ -81,6 +85,7 @@ export class AppComponent {
     return tmpNb;
   }
 
+  // Major Industry Identifier parsing
   private MIICheck(mii: number)
   {
     switch (mii) {
@@ -96,9 +101,9 @@ export class AppComponent {
       case 9: this.MII = "For assignment by national standards bodies"; break;
       default: this.MII = "Unknown";
     }
-    
   }
 
+  // Issuer Identifier Number parsing
   private IINCheck(iin: number)
   {
     let tmpNb: number = 0;
