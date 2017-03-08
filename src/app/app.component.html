@@ -14,16 +14,16 @@
       </h5>
       <h5 class="helv mt1">Major Industry Identifier: 
         <span class="helv mt1 blue">{{MII}}</span>
+        <span class="helv mt1 gray"> ({{MIINb}})</span>
       </h5>
       <h5 class="helv mt1">Issuer Identification Number: 
-        <span class="helv mt1 blue">{{IIN}}</span></h5>
+        <span class="helv mt1 blue">{{IIN}}</span>
+        <span class="helv mt1 gray"> ({{IINNb}})</span>
+      </h5>
     </div>
     <div *ngIf="!hasGoodLength" class mt2>
       <h5 class="helv mt1 gray">Invalid length</h5>
     </div>
-    <h5 class="helv mt1 gray">{{num1}}</h5>
-    <h5 class="helv mt1 gray">{{num2}}</h5>
-    <h5 class="helv mt1 gray">{{num3}}</h5>
   </div>
 
   <div class="col-4"></div>

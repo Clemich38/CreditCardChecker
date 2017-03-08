@@ -14,9 +14,8 @@ export class AppComponent {
   private isValid: boolean;
   private hasGoodLength: boolean;
 
-  private num1: number;
-  private num2: number;
-  private num3: number;
+  private MIINb: number;
+  private IINNb: number;
 
   constructor()
   {
@@ -25,15 +24,12 @@ export class AppComponent {
     this.IIN = "Unknown";
     this.hasGoodLength = false;
     this.isValid =  false;
-
-    this.num1 = 63138752986038755;
-    this.num2 = 99000;
-    this.num3 = this.extractDigits(this.num1, 6);
   }
 
   private Check(value)
   {
-    this.num3 = this.extractDigits(parseInt(value), 6);
+    this.MIINb = this.extractDigits(parseInt(value), 1);
+    this.IINNb = this.extractDigits(parseInt(value), 6);
 
     this.cardNb = value;
 
@@ -45,7 +41,7 @@ export class AppComponent {
     {
       this.isValid = this.LuhnCheck(tab);
       this.MIICheck(tab[0]);
-      this.IINCheck(this.cardNb);
+      this.IINCheck(this.extractDigits(parseInt(this.cardNb), 6));
       this.hasGoodLength = true;
     }
   }
@@ -80,7 +76,7 @@ export class AppComponent {
 
     while (tmpNb > upperLimit)
     {
-      tmpNb = parseInt((tmpNb / 10).toFixed(), 10);
+      tmpNb = parseInt((tmpNb / 10).toPrecision(), 10);
     }
     return tmpNb;
   }
@@ -103,9 +99,19 @@ export class AppComponent {
     
   }
 
-  private IINCheck(iin: string)
+  private IINCheck(iin: number)
   {
-    
+    // Visa
+    if(this.extractDigits(iin, 1) == 4)
+    {
+      this.IIN = "Visa";
+
+      // Visa Electron
+      let tmpNb = this.extractDigits(iin, 4);
+      if ((tmpNb == 4026) || (tmpNb == 4508) || (tmpNb == 4844) || (tmpNb == 4913) || (tmpNb == 4917))
+        this.IIN += " Electron";
+    }
+
   }
 
   get cardNbModel() {
