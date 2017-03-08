@@ -1,4 +1,4 @@
-<h1 class="center helv blue">
+<h1 class="center arial blue">
   {{title}}
 </h1>
 
@@ -6,23 +6,24 @@
   <div class="col-4"></div>
 
   <div class="col-4 flex  flex-column">
-    <h5 class="helv mt4 navy">Credit Card Number:</h5>
+    <h5 class="arial mt4 navy">Credit Card Number:</h5>
     <input type="text" [(ngModel)]="cardNbModel" [ngModelOptions]="{standalone: true}" pattern="[0-9 ]*" class="mt0 mb2 field blue">
     <div *ngIf="hasGoodLength" class mt2>
-      <h5 class="helv mt1 navy">Luhn Algorithm Check:
-        <span [ngClass]="isValid? 'helv mt1 green' : 'helv mt1 red'">{{isValid? "Valid" : "Invalid"}}</span>
+      <h5 class="arial mt1 navy">Luhn Algorithm Check:
+        <span [ngClass]="isValid? 'arial mt1 green' : 'arial mt1 red'">{{isValid? "Valid" : "Invalid"}}</span>
       </h5>
-      <h5 class="helv mt1 navy">Major Industry Identifier: 
-        <span class="helv mt1 blue">{{MII}}</span>
-        <span class="helv mt1 gray"> ({{MIINb}})</span>
+      <h5 class="arial mt1 navy">Major Industry Identifier: 
+        <span class="arial mt1 blue">{{MII}}</span>
+        <span class="arial mt1 gray"> ({{MIINb}})</span>
       </h5>
-      <h5 class="helv mt1 navy">Issuer Identification Number: 
-        <span class="helv mt1 blue">{{IIN}}</span>
-        <span class="helv mt1 gray"> ({{IINNb}})</span>
+      <h5 class="arial mt1 navy">Issuer Identification Number: 
+        <span class="arial mt1 blue">{{IIN}}</span>
+        <span class="arial mt1 gray"> ({{IINNb}})</span>
       </h5>
+      <img class="mt1" src="assets/{{cardImage}}.png" width="50px">
     </div>
     <div *ngIf="!hasGoodLength" class mt2>
-      <h5 class="helv mt1 gray">Invalid length</h5>
+      <h5 class="arial mt1 gray">Invalid length</h5>
     </div>
   </div>
 

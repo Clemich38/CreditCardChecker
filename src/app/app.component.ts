@@ -13,6 +13,7 @@ export class AppComponent {
   private IIN: string;
   private MIINb: number;
   private IINNb: number;
+  private cardImage: string;
   private isValid: boolean;
   private hasGoodLength: boolean;
 
@@ -21,6 +22,7 @@ export class AppComponent {
     this.cardNb = "";
     this.MII = "Unknown";
     this.IIN = "Unknown";
+    this.cardImage = "credit";
     this.hasGoodLength = false;
     this.isValid =  false;
   }
@@ -111,12 +113,14 @@ export class AppComponent {
   {
     let tmpNb: number = 0;
     this.IIN = "Unknown";
+    this.cardImage = "credit";
 
     // Visa (4)
     tmpNb = this.extractDigits(iin, 1);
     if(tmpNb == 4)
     {
       this.IIN = "Visa";
+      this.cardImage = "visa";
 
       // Visa Electron
       tmpNb = this.extractDigits(iin, 4);
@@ -129,18 +133,30 @@ export class AppComponent {
     {
       tmpNb = this.extractDigits(iin, 4);
       if (tmpNb == 6011)
+      {
         this.IIN = "Discover Card";
+        this.cardImage = "discover";
+      }
         
       tmpNb = this.extractDigits(iin, 3);
       if (tmpNb >= 644 && tmpNb <= 649)
+      {
         this.IIN = "Discover Card";
+        this.cardImage = "discover";
+      }
 
       tmpNb = this.extractDigits(iin, 2);
       if (tmpNb == 65)
+      {
         this.IIN = "Discover Card";
+        this.cardImage = "discover";
+      }
 
       if (iin >= 622126 && iin <= 622925)
+      {
         this.IIN = "Discover Card";
+        this.cardImage = "discover";
+      }
     }
 
     else
@@ -150,23 +166,28 @@ export class AppComponent {
       if (tmpNb >= 51 && tmpNb <= 55)
       {
         this.IIN = "MasterCard";
+        this.cardImage = "mastercard";
       }
 
       // Dinners Club (36 38)
       else if ((tmpNb == 36) || (tmpNb == 38))
       {
         this.IIN = "Diners Club";
+        this.cardImage = "diners";
       }
 
       // American Express (Amex) (34 37)
-      else if ((tmpNb == 34) || (tmpNb == 37)) {
+      else if ((tmpNb == 34) || (tmpNb == 37))
+      {
         this.IIN = "American Express (Amex)";
+        this.cardImage = "amex";
       }
 
       // Japan Credit Bureau  (35)
       else if (tmpNb == 35)
       {
         this.IIN = "Japan Credit Bureau (JCB)";
+        this.cardImage = "jcb";
       }
     }
 
