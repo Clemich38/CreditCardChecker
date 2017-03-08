@@ -1,0 +1,16 @@
+h1 {
+  /*color: #369;*/
+  font-family: Helvetica;
+  font-weight: 100;
+}
+
+.helv {
+  font-family: Helvetica;
+  font-weight: 100;
+}
+
+input {
+  font-family: Helvetica;
+  font-weight: 100;
+  color: #212121;
+}
