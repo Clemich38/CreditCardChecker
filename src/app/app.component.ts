@@ -159,6 +159,38 @@ export class AppComponent {
       }
     }
 
+    else if (tmpNb == 3)
+    {
+      // Dinners Club (36 38)
+      tmpNb = this.extractDigits(iin, 2);
+      if ((tmpNb == 36) || (tmpNb == 38) || (tmpNb == 39)) {
+        this.IIN = "Diners Club";
+        this.cardImage = "diners";
+      }
+
+      // American Express (Amex) (34 37)
+      else if ((tmpNb == 34) || (tmpNb == 37)) {
+        this.IIN = "American Express (Amex)";
+        this.cardImage = "amex";
+      }
+
+      // Japan Credit Bureau  (35)
+      else if (tmpNb == 35) {
+        this.IIN = "Japan Credit Bureau (JCB)";
+        this.cardImage = "jcb";
+      }
+
+      else
+      {
+        tmpNb = this.extractDigits(iin, 3);
+        if ((tmpNb >= 300 && tmpNb <= 305) || (tmpNb == 309)) {
+          this.IIN = "Diners Club";
+          this.cardImage = "diners";
+        }
+
+      }
+
+    }
     else
     {
       // Master Card (51 - 55)
@@ -167,27 +199,6 @@ export class AppComponent {
       {
         this.IIN = "MasterCard";
         this.cardImage = "mastercard";
-      }
-
-      // Dinners Club (36 38)
-      else if ((tmpNb == 36) || (tmpNb == 38))
-      {
-        this.IIN = "Diners Club";
-        this.cardImage = "diners";
-      }
-
-      // American Express (Amex) (34 37)
-      else if ((tmpNb == 34) || (tmpNb == 37))
-      {
-        this.IIN = "American Express (Amex)";
-        this.cardImage = "amex";
-      }
-
-      // Japan Credit Bureau  (35)
-      else if (tmpNb == 35)
-      {
-        this.IIN = "Japan Credit Bureau (JCB)";
-        this.cardImage = "jcb";
       }
     }
 

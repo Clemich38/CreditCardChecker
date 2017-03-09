@@ -35,24 +35,60 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Credit Card Checker');
   }));
 
-  for(let i = 0; i<10; i++)
+  // Import card nb JSON files
+  var visaCardTab = readJSON('./src/test/cardNbTestDatabase.json');
+  var masterCardTab = readJSON('./src/test/cardNbTestMasterDatabase.json');
+  var amexCardTab = readJSON('./src/test/cardNbTestAmexDatabase.json');
+  var dinnerCardTab = readJSON('./src/test/cardNbTestDinnerDatabase.json');
+  var discoverCardTab = readJSON('./src/test/cardNbTestDiscoverDatabase.json');
+
+  // Visa
+  for (let i = 0; i < visaCardTab.length; i++)
   {
-    it('should display Visa', fakeAsync(() => {
-      testInput(i);
+    it('should display Visa ' + i, fakeAsync(() => {
+      testInput(i, visaCardTab);
     }));
   }
 
-  function testInput(index: number)
-  {
-    var cardTab = readJSON('./src/test/cardNbTestDatabase.json');
+  // Master Card
+  for (let i = 0; i < masterCardTab.length; i++) {
+    it('should display Master Card ' + i, fakeAsync(() => {
+      testInput(i, masterCardTab);
+    }));
+  }
 
+  // Amex
+  for (let i = 0; i < amexCardTab.length; i++) {
+    it('should display American express ' + i, fakeAsync(() => {
+      testInput(i, amexCardTab);
+    }));
+  }
+
+  // Dinner club
+  for (let i = 0; i < dinnerCardTab.length; i++) {
+    it('should display Dinner Club ' + i, fakeAsync(() => {
+      testInput(i, dinnerCardTab);
+    }));
+  }
+
+  // Discover
+  for (let i = 0; i < discoverCardTab.length; i++) {
+    it('should display Discover ' + i, fakeAsync(() => {
+      testInput(i, discoverCardTab);
+    }));
+  }
+
+
+  function testInput(index: number, testTab)
+  {
     const fixture = TestBed.createComponent(AppComponent);
     const comp = fixture.componentInstance;
     fixture.detectChanges();
     let input = fixture.debugElement.query(By.css("#cardNbInput")).nativeElement;
-    input.value = cardTab[index].CreditCard.CardNumber;
+    input.value = testTab[index].CreditCard.CardNumber;
     input.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    expect((fixture.debugElement.query(By.css("#IINName")).nativeElement).textContent).toContain(cardTab[index].CreditCard.IssuingNetwork);
+    expect((fixture.debugElement.query(By.css("#IINName")).nativeElement).textContent).toContain(testTab[index].CreditCard.IssuingNetwork);
+    expect((fixture.debugElement.query(By.css("#IsValid")).nativeElement).textContent).toContain('Valid');
   }
 });

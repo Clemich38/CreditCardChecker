@@ -10,10 +10,10 @@
     <input id="cardNbInput" type="text" [(ngModel)]="cardNbModel" [ngModelOptions]="{standalone: true}" pattern="[0-9 ]*" class="mt0 mb2 field blue">
     <div *ngIf="hasGoodLength" class mt2>
       <h5 class="arial mt1 navy">Luhn Algorithm Check:
-        <span [ngClass]="isValid? 'arial mt1 green' : 'arial mt1 red'">{{isValid? "Valid" : "Invalid"}}</span>
+        <span id="IsValid" [ngClass]="isValid? 'arial mt1 green' : 'arial mt1 red'">{{isValid? "Valid" : "Invalid"}}</span>
       </h5>
       <h5 class="arial mt1 navy">Major Industry Identifier: 
-        <span class="arial mt1 blue">{{MII}}</span>
+        <span id="MIIName" class="arial mt1 blue">{{MII}}</span>
         <span class="arial mt1 gray"> ({{MIINb}})</span>
       </h5>
       <h5 class="arial mt1 navy">Issuer Identification Number: 
