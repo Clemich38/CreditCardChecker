@@ -16,7 +16,9 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
-      { pattern: './src/test.ts', watched: false }
+      './node_modules/karma-read-json/karma-read-json.js', 
+      { pattern: './src/test.ts', watched: false},
+      { pattern: './src/test/*.json', included: false }
     ],
     preprocessors: {
       './src/test.ts': ['@angular/cli']
